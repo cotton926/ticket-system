@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OpenAPI definition · 接口文档</title>
+<style>
+:root{--bg:#fff;--fg:#1f2328;--mut:#6b7280;--line:#e5e7eb;--card:#fff;--soft:#f6f8fa;--accent:#2563eb;}
+@media (prefers-color-scheme:dark){:root{--bg:#16181d;--fg:#e6e6e6;--mut:#9aa4b2;--line:#2c313a;--card:#1c1f26;--soft:#22262e;--accent:#60a5fa;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.65 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+header{border-bottom:1px solid var(--line);padding:22px 28px;background:var(--soft)}
+h1{margin:0 0 6px;font-size:20px;font-weight:650}
+.meta{color:var(--mut);font-size:12.5px}
+.meta code{background:rgba(127,127,127,.14);padding:1px 6px;border-radius:4px}
+.wrap{display:flex;align-items:flex-start;gap:0}
+nav{position:sticky;top:0;width:210px;flex:0 0 210px;height:100vh;overflow:auto;border-right:1px solid var(--line);padding:16px 0}
+nav .search{margin:0 14px 12px;width:calc(100% - 28px);padding:7px 10px;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--fg);font-size:13px;outline:none}
+nav .search:focus{border-color:var(--accent)}
+.nav-item{display:flex;align-items:center;gap:8px;padding:8px 16px;color:var(--fg);text-decoration:none;font-size:13px}
+.nav-item:hover{background:var(--soft)}
+.nav-item b{width:20px;height:20px;flex:0 0 20px;display:flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;border-radius:5px;font-size:11px;font-weight:600}
+.nav-item em{margin-left:auto;color:var(--mut);font-style:normal;font-size:11.5px}
+main{flex:1;min-width:0;padding:24px 28px 80px;max-width:1080px}
+h2{font-size:16px;margin:32px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+h2 small{color:var(--mut);font-weight:400;font-size:12px;margin-left:6px}
+.card{border:1px solid var(--line);border-radius:10px;background:var(--card);margin-bottom:14px;overflow:hidden}
+.card-h{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--soft);border-bottom:1px solid var(--line)}
+.m{font:600 11px/1 ui-monospace,SFMono-Regular,Consolas,monospace;padding:5px 8px;border-radius:5px;color:#fff;letter-spacing:.4px}
+.m-get{background:#0d9488}.m-post{background:#2563eb}.m-put{background:#d97706}.m-delete{background:#dc2626}.m-patch{background:#7c3aed}
+.path{font:13px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--fg);word-break:break-all}
+.card-b{padding:14px 16px}
+.summary{margin:0 0 4px;font-weight:600}
+.desc{margin:0 0 10px;color:var(--mut);font-size:13px}
+.block{margin-top:14px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.block-t{padding:7px 12px;background:var(--soft);border-bottom:1px solid var(--line);font-size:12px;color:var(--mut);font-weight:600}
+.s-row{display:grid;grid-template-columns:180px 130px 1fr;gap:10px;padding:5px 12px;border-top:1px solid var(--line);font-size:12.5px}
+.s-row:first-child{border-top:none}
+.s-name{font-family:ui-monospace,Consolas,monospace;word-break:break-all}
+.s-name .req{color:#dc2626;margin-left:2px}
+.s-type{color:var(--accent);font-family:ui-monospace,Consolas,monospace;word-break:break-all}
+.s-desc{color:var(--mut)}
+.s-sub{padding-left:20px;border-left:2px solid var(--line);margin-left:12px}
+.s-box{margin:6px 12px}
+.s-box summary{cursor:pointer;color:var(--accent);font-size:12.5px;padding:4px 0}
+.s-box .s-row{border-top:1px dashed var(--line)}
+pre.json{margin:0;padding:12px;background:var(--soft);font:12px/1.6 ui-monospace,Consolas,monospace;overflow:auto;color:var(--fg);white-space:pre}
+.muted{color:var(--mut)}
+.hide{display:none}
+footer{padding:20px 28px;color:var(--mut);font-size:12px;border-top:1px solid var(--line)}
+@media (max-width:820px){nav{display:none}.s-row{grid-template-columns:1fr;gap:2px}main{padding:16px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>OpenAPI definition</h1>
+  <div class="meta">OpenAPI 3.0.1 &nbsp;·&nbsp; 21 个接口 &nbsp;·&nbsp; 28 个数据模型 &nbsp;·&nbsp; 服务地址 <code>http://localhost:8080</code></div>
+</header>
+<div class="wrap">
+<nav>
+  <input class="search" id="q" placeholder="搜索接口 / 路径…" autocomplete="off">
+  <a class="nav-item" href="#g-A"><b>认</b><span>认证与会话</span><em>3</em></a><a class="nav-item" href="#g-I"><b>幂</b><span>幂等令牌</span><em>1</em></a><a class="nav-item" href="#g-T"><b>工</b><span>工单核心</span><em>16</em></a><a class="nav-item" href="#g-S"><b>统</b><span>统计</span><em>1</em></a>
+</nav>
+<main id="main">
+<section id="g-A"><h2>认证与会话 <small>3 个接口</small></h2>
+<article class="card" id="p-97664" data-search="/api/v1/auth/login post 登录 认证与会话 ">
+  <div class="card-h">
+    <span class="m m-post">POST</span>
+    <code class="path">/api/v1/auth/login</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">登录</p>
+    <div class="block"><div class="block-t">请求体 Request Body · 必填</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">username<span class="req">*</span></span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">password<span class="req">*</span></span><span class="s-type">string</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;username&quot;: &quot;string&quot;,
+  &quot;password&quot;: &quot;string&quot;
+}</pre></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">LoginResp</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">token</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">userId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">username</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">realName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">deptId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">deptName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">dataScope</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">roles</span><span class="s-type">array&lt;string&gt;</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">perms</span><span class="s-type">array&lt;string&gt;</span><span class="s-desc"></span></div></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {
+    &quot;token&quot;: &quot;string&quot;,
+    &quot;userId&quot;: 0,
+    &quot;username&quot;: &quot;string&quot;,
+    &quot;realName&quot;: &quot;string&quot;,
+    &quot;deptId&quot;: 0,
+    &quot;deptName&quot;: &quot;string&quot;,
+    &quot;dataScope&quot;: 0,
+    &quot;roles&quot;: [
+      &quot;string&quot;
+    ],
+    &quot;perms&quot;: [
+      &quot;string&quot;
+    ]
+  },
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-61645" data-search="/api/v1/auth/logout post 登出 认证与会话 ">
+  <div class="card-h">
+    <span class="m m-post">POST</span>
+    <code class="path">/api/v1/auth/logout</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">登出</p>
+    <div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">object</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {},
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-80495" data-search="/api/v1/auth/me get 当前用户信息与权限 认证与会话 ">
+  <div class="card-h">
+    <span class="m m-get">GET</span>
+    <code class="path">/api/v1/auth/me</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">当前用户信息与权限</p>
+    <div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">LoginResp</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">token</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">userId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">username</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">realName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">deptId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">deptName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">dataScope</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">roles</span><span class="s-type">array&lt;string&gt;</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">perms</span><span class="s-type">array&lt;string&gt;</span><span class="s-desc"></span></div></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {
+    &quot;token&quot;: &quot;string&quot;,
+    &quot;userId&quot;: 0,
+    &quot;username&quot;: &quot;string&quot;,
+    &quot;realName&quot;: &quot;string&quot;,
+    &quot;deptId&quot;: 0,
+    &quot;deptName&quot;: &quot;string&quot;,
+    &quot;dataScope&quot;: 0,
+    &quot;roles&quot;: [
+      &quot;string&quot;
+    ],
+    &quot;perms&quot;: [
+      &quot;string&quot;
+    ]
+  },
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article></section><section id="g-I"><h2>幂等令牌 <small>1 个接口</small></h2>
+<article class="card" id="p-44836" data-search="/api/v1/idempotent-token get 获取幂等令牌（5 分钟内一次性有效） 幂等令牌 ">
+  <div class="card-h">
+    <span class="m m-get">GET</span>
+    <code class="path">/api/v1/idempotent-token</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">获取幂等令牌（5 分钟内一次性有效）</p>
+    <div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">object</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {},
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article></section><section id="g-T"><h2>工单核心 <small>16 个接口</small></h2>
+<article class="card" id="p-37725" data-search="/api/v1/tickets get 工单列表（支持游标分页与偏移分页） 工单核心 ">
+  <div class="card-h">
+    <span class="m m-get">GET</span>
+    <code class="path">/api/v1/tickets</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">工单列表（支持游标分页与偏移分页）</p>
+    <div class="block"><div class="block-t">参数</div><div class="s-row"><span class="s-name">tab</span><span class="s-type">query · string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">status</span><span class="s-type">query · array</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">typeId</span><span class="s-type">query · integer</span><span class="s-desc">[int32]</span></div><div class="s-row"><span class="s-name">priority</span><span class="s-type">query · integer</span><span class="s-desc">[int32]</span></div><div class="s-row"><span class="s-name">keyword</span><span class="s-type">query · string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">startDate</span><span class="s-type">query · string</span><span class="s-desc">[date]</span></div><div class="s-row"><span class="s-name">endDate</span><span class="s-type">query · string</span><span class="s-desc">[date]</span></div><div class="s-row"><span class="s-name">pageNum</span><span class="s-type">query · integer</span><span class="s-desc">[int32]</span></div><div class="s-row"><span class="s-name">pageSize</span><span class="s-type">query · integer</span><span class="s-desc">[int32]</span></div><div class="s-row"><span class="s-name">needTotal</span><span class="s-type">query · boolean</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">lastCreateTime</span><span class="s-type">query · string</span><span class="s-desc">[date-time]</span></div><div class="s-row"><span class="s-name">lastId</span><span class="s-type">query · integer</span><span class="s-desc">[int64]</span></div><div class="s-row"><span class="s-name">cursorMode</span><span class="s-type">query · boolean</span><span class="s-desc"></span></div></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">PageResultTicketVO</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">list</span><span class="s-type">array&lt;TicketVO&gt;</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">id</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">ticketNo</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">title</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">typeId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">priority</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">status</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">creatorId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">creatorName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">assigneeId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">assigneeName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">createTime</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">deadline</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timeout</span><span class="s-type">boolean</span><span class="s-desc">是否已超 SLA</span></div><div class="s-row"><span class="s-name">actions</span><span class="s-type">array&lt;string&gt;</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">priorityDesc</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">statusDesc</span><span class="s-type">string</span><span class="s-desc"></span></div></div><div class="s-row"><span class="s-name">total</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">pageNum</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">pageSize</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">nextCursorTime</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">nextCursorId</span><span class="s-type">integer</span><span class="s-desc"></span></div></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {
+    &quot;list&quot;: [
+      {
+        &quot;id&quot;: 0,
+        &quot;ticketNo&quot;: &quot;string&quot;,
+        &quot;title&quot;: &quot;string&quot;,
+        &quot;typeId&quot;: 0,
+        &quot;priority&quot;: 0,
+        &quot;status&quot;: 0,
+        &quot;creatorId&quot;: 0,
+        &quot;creatorName&quot;: &quot;string&quot;,
+        &quot;assigneeId&quot;: 0,
+        &quot;assigneeName&quot;: &quot;string&quot;,
+        &quot;createTime&quot;: &quot;2026-11-18 20:00:00&quot;,
+        &quot;deadline&quot;: &quot;2026-11-18 20:00:00&quot;,
+        &quot;timeout&quot;: false,
+        &quot;actions&quot;: [
+          &quot;string&quot;
+        ],
+        &quot;priorityDesc&quot;: &quot;string&quot;,
+        &quot;statusDesc&quot;: &quot;string&quot;
+      }
+    ],
+    &quot;total&quot;: 0,
+    &quot;pageNum&quot;: 0,
+    &quot;pageSize&quot;: 0,
+    &quot;nextCursorTime&quot;: &quot;string&quot;,
+    &quot;nextCursorId&quot;: 0
+  },
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-93400" data-search="/api/v1/tickets post 提交工单 工单核心 ">
+  <div class="card-h">
+    <span class="m m-post">POST</span>
+    <code class="path">/api/v1/tickets</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">提交工单</p>
+    <p class="desc">需要请求头 X-Idempotent-Token（先调 GET /api/v1/idempotent-token 获取）</p><div class="block"><div class="block-t">请求体 Request Body · 必填</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">title<span class="req">*</span></span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">content<span class="req">*</span></span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">typeId<span class="req">*</span></span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">priority<span class="req">*</span></span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;title&quot;: &quot;string&quot;,
+  &quot;content&quot;: &quot;string&quot;,
+  &quot;typeId&quot;: 0,
+  &quot;priority&quot;: 0
+}</pre></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">TicketDetailVO</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">id</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">ticketNo</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">title</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">typeId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">priority</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">status</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">creatorId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">creatorName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">assigneeId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">assigneeName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">createTime</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">deadline</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timeout</span><span class="s-type">boolean</span><span class="s-desc">是否已超 SLA</span></div><div class="s-row"><span class="s-name">actions</span><span class="s-type">array&lt;string&gt;</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">content</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">assigneeDeptName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">creatorDeptName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">finishTime</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">closeTime</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">assignTime</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">flows</span><span class="s-type">array&lt;FlowLogVO&gt;</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">id</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">action</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">actionDesc</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">fromStatus</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">toStatus</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">operatorId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">operatorName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">remark</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">createTime</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">fromStatusDesc</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">toStatusDesc</span><span class="s-type">string</span><span class="s-desc"></span></div></div><div class="s-row"><span class="s-name">comments</span><span class="s-type">array&lt;TicketComment&gt;</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">id</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">ticketId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">userId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">userName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">content</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">isInternal</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">createTime</span><span class="s-type">string</span><span class="s-desc"></span></div></div><div class="s-row"><span class="s-name">availableActions</span><span class="s-type">array&lt;string&gt;</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">priorityDesc</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">statusDesc</span><span class="s-type">string</span><span class="s-desc"></span></div></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {
+    &quot;id&quot;: 0,
+    &quot;ticketNo&quot;: &quot;string&quot;,
+    &quot;title&quot;: &quot;string&quot;,
+    &quot;typeId&quot;: 0,
+    &quot;priority&quot;: 0,
+    &quot;status&quot;: 0,
+    &quot;creatorId&quot;: 0,
+    &quot;creatorName&quot;: &quot;string&quot;,
+    &quot;assigneeId&quot;: 0,
+    &quot;assigneeName&quot;: &quot;string&quot;,
+    &quot;createTime&quot;: &quot;2026-11-18 20:00:00&quot;,
+    &quot;deadline&quot;: &quot;2026-11-18 20:00:00&quot;,
+    &quot;timeout&quot;: false,
+    &quot;actions&quot;: [
+      &quot;string&quot;
+    ],
+    &quot;content&quot;: &quot;string&quot;,
+    &quot;assigneeDeptName&quot;: &quot;string&quot;,
+    &quot;creatorDeptName&quot;: &quot;string&quot;,
+    &quot;finishTime&quot;: &quot;2026-11-18 20:00:00&quot;,
+    &quot;closeTime&quot;: &quot;2026-11-18 20:00:00&quot;,
+    &quot;assignTime&quot;: &quot;2026-11-18 20:00:00&quot;,
+    &quot;flows&quot;: [
+      {
+        &quot;id&quot;: 0,
+        &quot;action&quot;: &quot;string&quot;,
+        &quot;actionDesc&quot;: &quot;string&quot;,
+        &quot;fromStatus&quot;: 0,
+        &quot;toStatus&quot;: 0,
+        &quot;operatorId&quot;: 0,
+        &quot;operatorName&quot;: &quot;string&quot;,
+        &quot;remark&quot;: &quot;string&quot;,
+        &quot;createTime&quot;: &quot;2026-11-18 20:00:00&quot;,
+        &quot;fromStatusDesc&quot;: &quot;string&quot;,
+        &quot;toStatusDesc&quot;: &quot;string&quot;
+      }
+    ],
+    &quot;comments&quot;: [
+      {
+        &quot;id&quot;: 0,
+        &quot;ticketId&quot;: 0,
+        &quot;userId&quot;: 0,
+        &quot;userName&quot;: &quot;string&quot;,
+        &quot;content&quot;: &quot;string&quot;,
+        &quot;isInternal&quot;: 0,
+        &quot;createTime&quot;: &quot;2026-11-18 20:00:00&quot;
+      }
+    ],
+    &quot;availableActions&quot;: [
+      &quot;string&quot;
+    ],
+    &quot;priorityDesc&quot;: &quot;string&quot;,
+    &quot;statusDesc&quot;: &quot;string&quot;
+  },
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-50224" data-search="/api/v1/tickets/types get 工单分类列表 工单核心 ">
+  <div class="card-h">
+    <span class="m m-get">GET</span>
+    <code class="path">/api/v1/tickets/types</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">工单分类列表</p>
+    <div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">array&lt;TicketType&gt;</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">id</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">name</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">parentId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">slaHours</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">status</span><span class="s-type">integer</span><span class="s-desc"></span></div></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;,
+      &quot;parentId&quot;: 0,
+      &quot;slaHours&quot;: 0,
+      &quot;status&quot;: 0
+    }
+  ],
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-94711" data-search="/api/v1/tickets/{id} get 工单详情（含时间线与评论） 工单核心 ">
+  <div class="card-h">
+    <span class="m m-get">GET</span>
+    <code class="path">/api/v1/tickets/{id}</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">工单详情（含时间线与评论）</p>
+    <div class="block"><div class="block-t">参数</div><div class="s-row"><span class="s-name">id<span class="req">*</span></span><span class="s-type">path · integer</span><span class="s-desc">工单ID</span></div></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">TicketDetailVO</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">id</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">ticketNo</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">title</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">typeId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">priority</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">status</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">creatorId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">creatorName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">assigneeId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">assigneeName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">createTime</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">deadline</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timeout</span><span class="s-type">boolean</span><span class="s-desc">是否已超 SLA</span></div><div class="s-row"><span class="s-name">actions</span><span class="s-type">array&lt;string&gt;</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">content</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">assigneeDeptName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">creatorDeptName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">finishTime</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">closeTime</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">assignTime</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">flows</span><span class="s-type">array&lt;FlowLogVO&gt;</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">id</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">action</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">actionDesc</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">fromStatus</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">toStatus</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">operatorId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">operatorName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">remark</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">createTime</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">fromStatusDesc</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">toStatusDesc</span><span class="s-type">string</span><span class="s-desc"></span></div></div><div class="s-row"><span class="s-name">comments</span><span class="s-type">array&lt;TicketComment&gt;</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">id</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">ticketId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">userId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">userName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">content</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">isInternal</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">createTime</span><span class="s-type">string</span><span class="s-desc"></span></div></div><div class="s-row"><span class="s-name">availableActions</span><span class="s-type">array&lt;string&gt;</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">priorityDesc</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">statusDesc</span><span class="s-type">string</span><span class="s-desc"></span></div></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {
+    &quot;id&quot;: 0,
+    &quot;ticketNo&quot;: &quot;string&quot;,
+    &quot;title&quot;: &quot;string&quot;,
+    &quot;typeId&quot;: 0,
+    &quot;priority&quot;: 0,
+    &quot;status&quot;: 0,
+    &quot;creatorId&quot;: 0,
+    &quot;creatorName&quot;: &quot;string&quot;,
+    &quot;assigneeId&quot;: 0,
+    &quot;assigneeName&quot;: &quot;string&quot;,
+    &quot;createTime&quot;: &quot;2026-11-18 20:00:00&quot;,
+    &quot;deadline&quot;: &quot;2026-11-18 20:00:00&quot;,
+    &quot;timeout&quot;: false,
+    &quot;actions&quot;: [
+      &quot;string&quot;
+    ],
+    &quot;content&quot;: &quot;string&quot;,
+    &quot;assigneeDeptName&quot;: &quot;string&quot;,
+    &quot;creatorDeptName&quot;: &quot;string&quot;,
+    &quot;finishTime&quot;: &quot;2026-11-18 20:00:00&quot;,
+    &quot;closeTime&quot;: &quot;2026-11-18 20:00:00&quot;,
+    &quot;assignTime&quot;: &quot;2026-11-18 20:00:00&quot;,
+    &quot;flows&quot;: [
+      {
+        &quot;id&quot;: 0,
+        &quot;action&quot;: &quot;string&quot;,
+        &quot;actionDesc&quot;: &quot;string&quot;,
+        &quot;fromStatus&quot;: 0,
+        &quot;toStatus&quot;: 0,
+        &quot;operatorId&quot;: 0,
+        &quot;operatorName&quot;: &quot;string&quot;,
+        &quot;remark&quot;: &quot;string&quot;,
+        &quot;createTime&quot;: &quot;2026-11-18 20:00:00&quot;,
+        &quot;fromStatusDesc&quot;: &quot;string&quot;,
+        &quot;toStatusDesc&quot;: &quot;string&quot;
+      }
+    ],
+    &quot;comments&quot;: [
+      {
+        &quot;id&quot;: 0,
+        &quot;ticketId&quot;: 0,
+        &quot;userId&quot;: 0,
+        &quot;userName&quot;: &quot;string&quot;,
+        &quot;content&quot;: &quot;string&quot;,
+        &quot;isInternal&quot;: 0,
+        &quot;createTime&quot;: &quot;2026-11-18 20:00:00&quot;
+      }
+    ],
+    &quot;availableActions&quot;: [
+      &quot;string&quot;
+    ],
+    &quot;priorityDesc&quot;: &quot;string&quot;,
+    &quot;statusDesc&quot;: &quot;string&quot;
+  },
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-44121" data-search="/api/v1/tickets/{id}/accept put 接单 工单核心 ">
+  <div class="card-h">
+    <span class="m m-put">PUT</span>
+    <code class="path">/api/v1/tickets/{id}/accept</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">接单</p>
+    <div class="block"><div class="block-t">参数</div><div class="s-row"><span class="s-name">id<span class="req">*</span></span><span class="s-type">path · integer</span><span class="s-desc"></span></div></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">object</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {},
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-3608" data-search="/api/v1/tickets/{id}/assign put 分派工单 工单核心 ">
+  <div class="card-h">
+    <span class="m m-put">PUT</span>
+    <code class="path">/api/v1/tickets/{id}/assign</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">分派工单</p>
+    <div class="block"><div class="block-t">参数</div><div class="s-row"><span class="s-name">id<span class="req">*</span></span><span class="s-type">path · integer</span><span class="s-desc"></span></div></div><div class="block"><div class="block-t">请求体 Request Body · 必填</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">assigneeId<span class="req">*</span></span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">remark</span><span class="s-type">string</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;assigneeId&quot;: 0,
+  &quot;remark&quot;: &quot;string&quot;
+}</pre></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">object</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {},
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-87386" data-search="/api/v1/tickets/{id}/close put 强制关闭 工单核心 ">
+  <div class="card-h">
+    <span class="m m-put">PUT</span>
+    <code class="path">/api/v1/tickets/{id}/close</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">强制关闭</p>
+    <div class="block"><div class="block-t">参数</div><div class="s-row"><span class="s-name">id<span class="req">*</span></span><span class="s-type">path · integer</span><span class="s-desc"></span></div></div><div class="block"><div class="block-t">请求体 Request Body</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">remark</span><span class="s-type">string</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;remark&quot;: &quot;string&quot;
+}</pre></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">object</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {},
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-40273" data-search="/api/v1/tickets/{id}/comments get 评论列表 工单核心 ">
+  <div class="card-h">
+    <span class="m m-get">GET</span>
+    <code class="path">/api/v1/tickets/{id}/comments</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">评论列表</p>
+    <div class="block"><div class="block-t">参数</div><div class="s-row"><span class="s-name">id<span class="req">*</span></span><span class="s-type">path · integer</span><span class="s-desc"></span></div></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">array&lt;TicketComment&gt;</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">id</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">ticketId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">userId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">userName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">content</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">isInternal</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">createTime</span><span class="s-type">string</span><span class="s-desc"></span></div></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: 0,
+      &quot;ticketId&quot;: 0,
+      &quot;userId&quot;: 0,
+      &quot;userName&quot;: &quot;string&quot;,
+      &quot;content&quot;: &quot;string&quot;,
+      &quot;isInternal&quot;: 0,
+      &quot;createTime&quot;: &quot;2026-11-18 20:00:00&quot;
+    }
+  ],
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-24828" data-search="/api/v1/tickets/{id}/comments post 评论 / 内部备注 工单核心 ">
+  <div class="card-h">
+    <span class="m m-post">POST</span>
+    <code class="path">/api/v1/tickets/{id}/comments</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">评论 / 内部备注</p>
+    <div class="block"><div class="block-t">参数</div><div class="s-row"><span class="s-name">id<span class="req">*</span></span><span class="s-type">path · integer</span><span class="s-desc"></span></div></div><div class="block"><div class="block-t">请求体 Request Body · 必填</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">content<span class="req">*</span></span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">internal</span><span class="s-type">boolean</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;content&quot;: &quot;string&quot;,
+  &quot;internal&quot;: false
+}</pre></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: 0,
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-8757" data-search="/api/v1/tickets/{id}/finish put 提交完成 工单核心 ">
+  <div class="card-h">
+    <span class="m m-put">PUT</span>
+    <code class="path">/api/v1/tickets/{id}/finish</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">提交完成</p>
+    <div class="block"><div class="block-t">参数</div><div class="s-row"><span class="s-name">id<span class="req">*</span></span><span class="s-type">path · integer</span><span class="s-desc"></span></div></div><div class="block"><div class="block-t">请求体 Request Body</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">remark</span><span class="s-type">string</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;remark&quot;: &quot;string&quot;
+}</pre></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">object</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {},
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-88046" data-search="/api/v1/tickets/{id}/flows get 流转时间线 工单核心 ">
+  <div class="card-h">
+    <span class="m m-get">GET</span>
+    <code class="path">/api/v1/tickets/{id}/flows</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">流转时间线</p>
+    <div class="block"><div class="block-t">参数</div><div class="s-row"><span class="s-name">id<span class="req">*</span></span><span class="s-type">path · integer</span><span class="s-desc"></span></div></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">array&lt;FlowLogVO&gt;</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">id</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">action</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">actionDesc</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">fromStatus</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">toStatus</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">operatorId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">operatorName</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">remark</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">createTime</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">fromStatusDesc</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">toStatusDesc</span><span class="s-type">string</span><span class="s-desc"></span></div></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: 0,
+      &quot;action&quot;: &quot;string&quot;,
+      &quot;actionDesc&quot;: &quot;string&quot;,
+      &quot;fromStatus&quot;: 0,
+      &quot;toStatus&quot;: 0,
+      &quot;operatorId&quot;: 0,
+      &quot;operatorName&quot;: &quot;string&quot;,
+      &quot;remark&quot;: &quot;string&quot;,
+      &quot;createTime&quot;: &quot;2026-11-18 20:00:00&quot;,
+      &quot;fromStatusDesc&quot;: &quot;string&quot;,
+      &quot;toStatusDesc&quot;: &quot;string&quot;
+    }
+  ],
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-76016" data-search="/api/v1/tickets/{id}/reopen put 重新打开（已关闭 7 天内） 工单核心 ">
+  <div class="card-h">
+    <span class="m m-put">PUT</span>
+    <code class="path">/api/v1/tickets/{id}/reopen</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">重新打开（已关闭 7 天内）</p>
+    <div class="block"><div class="block-t">参数</div><div class="s-row"><span class="s-name">id<span class="req">*</span></span><span class="s-type">path · integer</span><span class="s-desc"></span></div></div><div class="block"><div class="block-t">请求体 Request Body</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">remark</span><span class="s-type">string</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;remark&quot;: &quot;string&quot;
+}</pre></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">object</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {},
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-25555" data-search="/api/v1/tickets/{id}/resume put 恢复处理 工单核心 ">
+  <div class="card-h">
+    <span class="m m-put">PUT</span>
+    <code class="path">/api/v1/tickets/{id}/resume</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">恢复处理</p>
+    <div class="block"><div class="block-t">参数</div><div class="s-row"><span class="s-name">id<span class="req">*</span></span><span class="s-type">path · integer</span><span class="s-desc"></span></div></div><div class="block"><div class="block-t">请求体 Request Body</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">remark</span><span class="s-type">string</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;remark&quot;: &quot;string&quot;
+}</pre></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">object</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {},
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-39439" data-search="/api/v1/tickets/{id}/suspend put 挂起 工单核心 ">
+  <div class="card-h">
+    <span class="m m-put">PUT</span>
+    <code class="path">/api/v1/tickets/{id}/suspend</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">挂起</p>
+    <div class="block"><div class="block-t">参数</div><div class="s-row"><span class="s-name">id<span class="req">*</span></span><span class="s-type">path · integer</span><span class="s-desc"></span></div></div><div class="block"><div class="block-t">请求体 Request Body</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">remark</span><span class="s-type">string</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;remark&quot;: &quot;string&quot;
+}</pre></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">object</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {},
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-68203" data-search="/api/v1/tickets/{id}/transfer put 转派（状态不变，只换处理人） 工单核心 ">
+  <div class="card-h">
+    <span class="m m-put">PUT</span>
+    <code class="path">/api/v1/tickets/{id}/transfer</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">转派（状态不变，只换处理人）</p>
+    <div class="block"><div class="block-t">参数</div><div class="s-row"><span class="s-name">id<span class="req">*</span></span><span class="s-type">path · integer</span><span class="s-desc"></span></div></div><div class="block"><div class="block-t">请求体 Request Body · 必填</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">assigneeId<span class="req">*</span></span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">remark<span class="req">*</span></span><span class="s-type">string</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;assigneeId&quot;: 0,
+  &quot;remark&quot;: &quot;string&quot;
+}</pre></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">object</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {},
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article>
+<article class="card" id="p-47160" data-search="/api/v1/tickets/{id}/verify put 验收（pass=true 通过 / false 驳回，驳回必须填原因） 工单核心 ">
+  <div class="card-h">
+    <span class="m m-put">PUT</span>
+    <code class="path">/api/v1/tickets/{id}/verify</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">验收（pass=true 通过 / false 驳回，驳回必须填原因）</p>
+    <div class="block"><div class="block-t">参数</div><div class="s-row"><span class="s-name">id<span class="req">*</span></span><span class="s-type">path · integer</span><span class="s-desc"></span></div></div><div class="block"><div class="block-t">请求体 Request Body · 必填</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">pass<span class="req">*</span></span><span class="s-type">boolean</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">remark</span><span class="s-type">string</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;pass&quot;: false,
+  &quot;remark&quot;: &quot;string&quot;
+}</pre></div><div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">object</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {},
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article></section><section id="g-S"><h2>统计 <small>1 个接口</small></h2>
+<article class="card" id="p-62406" data-search="/api/v1/stats/overview get 统计概览（总量 / 今日新增 / 超时数 / 平均处理时长 / 状态分布 / 处理人负载） 统计 ">
+  <div class="card-h">
+    <span class="m m-get">GET</span>
+    <code class="path">/api/v1/stats/overview</code>
+  </div>
+  <div class="card-b">
+    <p class="summary">统计概览（总量 / 今日新增 / 超时数 / 平均处理时长 / 状态分布 / 处理人负载）</p>
+    <div class="block"><div class="block-t">响应 200</div><details class="s-box"><summary>展开字段结构</summary><div class="s-row"><span class="s-name">code</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">message</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">data</span><span class="s-type">StatOverviewVO</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">total</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">todayCreated</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timeoutCount</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">avgCostMinutes</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">byStatus</span><span class="s-type">array&lt;StatusCount&gt;</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">status</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">statusDesc</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">count</span><span class="s-type">integer</span><span class="s-desc"></span></div></div><div class="s-row"><span class="s-name">topLoad</span><span class="s-type">array&lt;AssigneeLoad&gt;</span><span class="s-desc"></span></div><div class="s-sub"><div class="s-row"><span class="s-name">assigneeId</span><span class="s-type">integer</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">pending</span><span class="s-type">integer</span><span class="s-desc"></span></div></div></div><div class="s-row"><span class="s-name">traceId</span><span class="s-type">string</span><span class="s-desc"></span></div><div class="s-row"><span class="s-name">timestamp</span><span class="s-type">integer</span><span class="s-desc"></span></div></details><pre class="json">{
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;string&quot;,
+  &quot;data&quot;: {
+    &quot;total&quot;: 0,
+    &quot;todayCreated&quot;: 0,
+    &quot;timeoutCount&quot;: 0,
+    &quot;avgCostMinutes&quot;: 0,
+    &quot;byStatus&quot;: [
+      {
+        &quot;status&quot;: 0,
+        &quot;statusDesc&quot;: &quot;string&quot;,
+        &quot;count&quot;: 0
+      }
+    ],
+    &quot;topLoad&quot;: [
+      {
+        &quot;assigneeId&quot;: 0,
+        &quot;pending&quot;: 0
+      }
+    ]
+  },
+  &quot;traceId&quot;: &quot;string&quot;,
+  &quot;timestamp&quot;: 0
+}</pre></div>
+  </div>
+</article></section>
+<div id="empty" class="hide muted" style="padding:30px 0">没有匹配的接口</div>
+</main>
+</div>
+<footer>由 ticket-system 自动生成 · 静态离线文档，无需联网 · 启动服务后可在 <code>/swagger-ui/index.html</code> 调试</footer>
+<script>
+(function(){
+  var q=document.getElementById('q');
+  var cards=[].slice.call(document.querySelectorAll('.card'));
+  var secs=[].slice.call(document.querySelectorAll('section'));
+  q.addEventListener('input',function(){
+    var v=q.value.trim().toLowerCase();
+    var hit=0;
+    cards.forEach(function(c){
+      var ok=!v||c.getAttribute('data-search').indexOf(v)>-1;
+      c.classList.toggle('hide',!ok);
+      if(ok)hit++;
+    });
+    secs.forEach(function(s){
+      var any=[].slice.call(s.querySelectorAll('.card')).some(function(c){return !c.classList.contains('hide')});
+      s.classList.toggle('hide',!any);
+    });
+    document.getElementById('empty').classList.toggle('hide',hit>0);
+  });
+})();
+</script>
+</body>
+</html>

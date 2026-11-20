@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ticket.ticket.mapper.TicketMapper">
+
+    <!--
+      列表查询只取 8 个必要字段，不查 content（TEXT，平均 800 字节）。
+      这既省网络与内存，也让"覆盖索引 + 延迟回表"有机会生效。
+    -->
+    <sql id="pageColumns">
+        t.id, t.ticket_no, t.title, t.type_id, t.priority, t.status,
+        t.creator_id, t.assignee_id, t.create_time, t.deadline
+    </sql>
+
+    <sql id="pageWhere">
+        t.deleted = 0
+        <if test="creatorId != null">
+            AND t.creator_id = #{creatorId}
+        </if>
+        <if test="assigneeId != null">
+            AND t.assignee_id = #{assigneeId}
+        </if>
+        <if test="status != null and status.size() > 0">
+            AND t.status IN
+            <foreach collection="status" item="s" open="(" separator="," close=")">#{s}</foreach>
+        </if>
+        <if test="typeId != null">
+            AND t.type_id = #{typeId}
+        </if>
+        <if test="priority != null">
+            AND t.priority = #{priority}
+        </if>
+        <!-- 左闭右开：endTime 已是 endDate+1 天的 00:00:00，避免 23:59:59 漏毫秒 -->
+        <if test="startTime != null">
+            AND t.create_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND t.create_time &lt; #{endTime}
+        </if>
+        <!-- 只允许前缀匹配：LIKE '%x%' 无法使用 B+ 树，是列表接口最常见的隐形全表扫 -->
+        <if test="keyword != null and keyword != ''">
+            AND (t.ticket_no LIKE CONCAT(#{keyword}, '%') OR t.title LIKE CONCAT(#{keyword}, '%'))
+        </if>
+        <!-- 双字段游标：同毫秒多条数据时用 id 兜底，避免漏读/重读 -->
+        <if test="lastCreateTime != null">
+            AND (t.create_time &lt; #{lastCreateTime}
+                 OR (t.create_time = #{lastCreateTime} AND t.id &lt; #{lastId}))
+        </if>
+        <!-- 数据权限片段：由切面用 Long 类型拼接，不含用户输入，故可安全使用 ${} -->
+        <if test="dataScope != null and dataScope != ''">
+            ${dataScope}
+        </if>
+    </sql>
+
+    <select id="selectPage" parameterType="com.example.ticket.ticket.dto.TicketQueryReq"
+            resultType="com.example.ticket.ticket.vo.TicketVO">
+        SELECT <include refid="pageColumns"/>
+        FROM ticket t
+        WHERE <include refid="pageWhere"/>
+        <!--
+          排序说明（实测结论，别想当然）：
+          · status 为单值：type=ref + Backward index scan，完全无排序
+          · status 为 IN(20,30)：type=range，MySQL 要跨两段索引取值，
+            无法靠单次反向遍历满足 ORDER BY，会出现 Using filesort
+          但此时排序对象只是"已被索引过滤出来的那几百行"，代价可忽略 ——
+          不要看到 filesort 就以为优化失败，关键看它对多少行排序。
+        -->
+        ORDER BY t.create_time DESC, t.id DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countPage" parameterType="com.example.ticket.ticket.dto.TicketQueryReq" resultType="long">
+        SELECT COUNT(1)
+        FROM ticket t
+        WHERE <include refid="pageWhere"/>
+    </select>
+
+    <select id="selectById" resultType="com.example.ticket.ticket.entity.Ticket">
+        SELECT *
+        FROM ticket
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <insert id="insert" parameterType="com.example.ticket.ticket.entity.Ticket"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO ticket (ticket_no, title, content, type_id, priority, status,
+                            creator_id, creator_dept, deadline, version, deleted)
+        VALUES (#{ticketNo}, #{title}, #{content}, #{typeId}, #{priority}, #{status},
+                #{creatorId}, #{creatorDept}, #{deadline}, 0, 0)
+    </insert>
+
+    <!--
+      CAS 更新：一条语句同时完成「校验前置状态」与「写入新状态」。
+      SET 里的 <if> 让同一语句既能做纯状态流转，也能顺带改处理人/时间戳，
+      避免为每个动作写一条 UPDATE 导致 SQL 爆炸。
+    -->
+    <update id="casUpdate" parameterType="com.example.ticket.ticket.dto.TicketCasParam">
+        UPDATE ticket
+        <set>
+            status = #{toStatus},
+            version = version + 1,
+            <if test="assigneeId != null">
+                assignee_id = #{assigneeId},
+                assignee_dept = #{assigneeDept},
+                assign_time = NOW(),
+            </if>
+            <if test="finishTime != null">
+                finish_time = #{finishTime},
+            </if>
+            <if test="closeTime != null">
+                close_time = #{closeTime},
+            </if>
+        </set>
+        WHERE id = #{id}
+          AND status = #{fromStatus}
+          AND version = #{version}
+          AND deleted = 0
+    </update>
+
+    <select id="selectMaxTicketNo" resultType="java.lang.String">
+        SELECT MAX(ticket_no) FROM ticket WHERE ticket_no LIKE CONCAT(#{prefix}, '%')
+    </select>
+
+    <select id="selectTimeoutCandidates" resultType="com.example.ticket.ticket.entity.Ticket">
+        SELECT id, ticket_no, status, assignee_id, deadline
+        FROM ticket
+        WHERE deleted = 0
+          AND timeout_flag = 0
+          AND status IN (20, 30)
+          AND deadline IS NOT NULL
+          AND deadline &lt; #{now}
+        ORDER BY deadline ASC
+        LIMIT #{limit}
+    </select>
+
+    <update id="markTimeout">
+        UPDATE ticket SET timeout_flag = 1
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">#{id}</foreach>
+    </update>
+
+</mapper>
